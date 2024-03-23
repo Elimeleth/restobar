@@ -174,7 +174,7 @@ const DashboardScreen = ({ history }) => {
             <div className="col-12 col-lg-6">
                 <div className="card">
                     <div className="card-header border-0">
-                        <h3 className="card-title">Restobar Overview</h3>
+                        <h3 className="card-title">Comandera Overview</h3>
                     </div>
                     <div className="card-body">
                         <div className="d-flex justify-content-between align-items-center border-bottom mb-3">

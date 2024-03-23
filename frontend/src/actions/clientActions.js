@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios from "../axios.conf";
 import {
     CLIENT_LIST_REQUEST,
     CLIENT_LIST_SUCCESS,
@@ -40,7 +40,7 @@ export const listClients =
 
             //get all clients
             const { data } = await axios.get(
-                `/api/clients?keyword=${keyword}&pageNumber=${pageNumber}`,
+                `api/clients?keyword=${keyword}&pageNumber=${pageNumber}`,
                 config
             );
 
@@ -151,7 +151,7 @@ export const updateClient = (client) => async (dispatch, getState) => {
 
         //update client
         const { data } = await axios.put(
-            `/api/clients/${client.id}`,
+            `api/clients/${client.id}`,
             client,
             config
         );

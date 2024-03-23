@@ -12,6 +12,7 @@ exports.registerUser = asyncHandler(async (req, res) => {
 
     //check if email is already in use
     const userExists = await User.findOne({ where: { email } });
+    
     if (userExists) {
         res.status(400);
         throw new Error("User already exists");
@@ -45,9 +46,10 @@ exports.registerUser = asyncHandler(async (req, res) => {
 exports.login = asyncHandler(async (req, res) => {
     const { email, password } = req.body;
 
+    
     //check if email is already in use
     const user = await User.scope("withPassword").findOne({ where: { email } });
-
+    
     //if user exist and entered password is the same
     if (user && (await user.validPassword(password))) {
         res.json({
@@ -70,6 +72,7 @@ exports.login = asyncHandler(async (req, res) => {
 exports.getUser = asyncHandler(async (req, res) => {
     const user = await User.findByPk(req.params.id);
 
+    
     if (user) {
         res.json(user);
     } else {

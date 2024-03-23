@@ -45,20 +45,6 @@ const SignInScreen = ({ history }) => {
                                         >
                                             ×
                                         </button>
-                                        <h5>
-                                            <i className="icon fas fa-info" />{" "}
-                                            Test Users
-                                        </h5>
-                                        <div className="row justify-content-between">
-                                            <div className="col-3">
-                                                <p>admin@example.com</p>
-                                                <p>123456</p>
-                                            </div>
-                                            <div className="col-3">
-                                                <p>user@example.com</p>
-                                                <p>123456</p>
-                                            </div>
-                                        </div>
                                     </div>
                                     <h3 className="login-heading mb-4">
                                         Welcome back!

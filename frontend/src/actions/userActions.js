@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios from "../axios.conf";
 import {
     USER_LOGIN_REQUEST,
     USER_LOGIN_FAIL,
@@ -38,10 +38,11 @@ export const login = (email, password) => async (dispatch) => {
 
         //get login data
         const { data } = await axios.post(
-            "/api/users/login",
+            "api/users/login",
             { email, password },
             config
         );
+        console.log({ data })
         dispatch({
             type: USER_LOGIN_SUCCESS,
             payload: data,
@@ -91,7 +92,7 @@ export const listUsers =
 
             //get all users
             const { data } = await axios.get(
-                `/api/users?keyword=${keyword}&pageNumber=${pageNumber}`,
+                `api/users?keyword=${keyword}&pageNumber=${pageNumber}`,
                 config
             );
             dispatch({
@@ -133,7 +134,7 @@ export const register = (user) => async (dispatch, getState) => {
 
         //get login data
         const { data } = await axios.post(
-            "/api/users",
+            "api/users",
             { name, email, password, isAdmin },
             config
         );
@@ -277,7 +278,7 @@ export const updateProfile = (user) => async (dispatch, getState) => {
 
         //update user
         const { data } = await axios.put(
-            `/api/users/profile/${user.id}`,
+            `api/users/profile/${user.id}`,
             user,
             config
         );

@@ -3,8 +3,9 @@ services:
     mysql:
         image: mysql:5.7
         ports:
-            - "33061:3306"
+            - "3306:3306"
         command: --init-file /data/application/init.sql
+        restart: always
         volumes:
             - ./database/init.sql:/data/application/init.sql
         environment:
@@ -13,19 +14,11 @@ services:
             MYSQL_DATABASE: restobar
             MYSQL_USER: mysql
             MYSQL_PASSWORD: secret
-    nginx:
-        restart: always
-        depends_on:
-            - backend
-            - frontend
-        build:
-            dockerfile: Dockerfile.dev
-            context: ./nginx
-        ports:
-            - "3000:80"
     backend:
         depends_on:
             - mysql
+        hostname: bakend
+        restart: always
         build:
             dockerfile: Dockerfile.dev
             context: backend
@@ -45,10 +38,14 @@ services:
             - PORT=5000
             - JWT_SECRET=abc123
     frontend:
-        stdin_open: true
+        restart: always
         build:
             dockerfile: Dockerfile.dev
             context: ./frontend
+        links:
+            - backend
+        ports:
+            - "3000:3000"
         volumes:
             - /app/node_modules
             - ./frontend:/app

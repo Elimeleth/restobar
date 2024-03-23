@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios from "../axios.conf";
 import {
     PRODUCT_LIST_REQUEST,
     PRODUCT_LIST_SUCCESS,
@@ -41,7 +41,7 @@ export const listProducts = (keyword = "", pageNumber = "") => async (
 
         //get all products
         const { data } = await axios.get(
-            `/api/products?keyword=${keyword}&pageNumber=${pageNumber}`,
+            `api/products?keyword=${keyword}&pageNumber=${pageNumber}`,
             config
         );
 
@@ -152,7 +152,7 @@ export const updateProduct = (product) => async (dispatch, getState) => {
 
         //update product
         const { data } = await axios.put(
-            `/api/products/${product.id}`,
+            `api/products/${product.id}`,
             product,
             config
         );

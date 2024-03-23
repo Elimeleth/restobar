@@ -35,7 +35,7 @@ const Menu = ({ history }) => {
                     className="brand-image img-circle elevation-3"
                     style={{ opacity: ".8" }}
                 />
-                <span className="brand-text font-weight-light">Restobar</span>
+                <span className="brand-text font-weight-light">BAKANO</span>
             </Link>
             {/* Sidebar */}
             <div className="sidebar">
@@ -43,7 +43,7 @@ const Menu = ({ history }) => {
                 <div className="user-panel mt-3 pb-3 mb-3 d-flex">
                     <div className="image">
                         <img
-                            src={userInfo ? userInfo.image : "/avatar.png"}
+                            src={userInfo ? userInfo.image : "/comandera.webp"}
                             className="img-circle elevation-2"
                             alt="User"
                         />
@@ -85,7 +85,7 @@ const Menu = ({ history }) => {
                             ""
                         )}
 
-                        <li className="nav-header">RESTOBAR</li>
+                        <li className="nav-header">COMANDERA</li>
                         <li className="nav-item">
                             <Link to="/active" className="nav-link">
                                 <i className="nav-icon fas fa-bell" />{" "}

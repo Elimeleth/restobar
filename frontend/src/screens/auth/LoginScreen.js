@@ -36,7 +36,7 @@ const LoginScreen = ({ history }) => {
                 <div className="card">
                     <div className="card-header ">
                         <div className="login-logo">
-                            <b>Restobar</b>
+                            <b>BAKANO</b>
                             <div className="text-center">
                                 <img
                                     className="profile-user-img img-fluid img-circle"
@@ -95,24 +95,6 @@ const LoginScreen = ({ history }) => {
                                 </div>
                             </div>
                             <br />
-                            <div className="alert alert-info alert-dismissible">
-                                <button
-                                    type="button"
-                                    className="close"
-                                    data-dismiss="alert"
-                                    aria-hidden="true"
-                                >
-                                    ×
-                                </button>
-                                <h5>
-                                    <i className="icon fas fa-info" /> Test
-                                    Users
-                                </h5>
-                                <p>admin@example.com</p>
-                                <p>user@example.com</p>
-                                <hr />
-                                <p>pass: 123456</p>
-                            </div>
                         </form>
                         <div></div>
                     </div>

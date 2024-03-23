@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios from "../axios.conf";
 import {
     CATEGORY_LIST_REQUEST,
     CATEGORY_LIST_SUCCESS,
@@ -40,7 +40,7 @@ export const listCategories =
 
             //get all categories
             const { data } = await axios.get(
-                `/api/categories?keyword=${keyword}&pageNumber=${pageNumber}`,
+                `api/categories?keyword=${keyword}&pageNumber=${pageNumber}`,
                 config
             );
 
@@ -153,7 +153,7 @@ export const updateCategory = (category) => async (dispatch, getState) => {
 
         //update category
         const { data } = await axios.put(
-            `/api/categories/${category.id}`,
+            `api/categories/${category.id}`,
             category,
             config
         );

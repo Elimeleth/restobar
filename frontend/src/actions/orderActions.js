@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios from "../axios.conf";
 import {
     ORDER_LIST_REQUEST,
     ORDER_LIST_SUCCESS,
@@ -79,7 +79,7 @@ export const listOrders = (options) => async (dispatch, getState) => {
 
         //get all orders
         const { data } = await axios.get(
-            `/api/orders/?keyword=${keyword}&pageNumber=${pageNumber}${
+            `api/orders/?keyword=${keyword}&pageNumber=${pageNumber}${
                 delivery ? "&delivery=true" : ""
             }`,
             config
@@ -192,7 +192,7 @@ export const updateOrder = (order) => async (dispatch, getState) => {
 
         //update order
         const { data } = await axios.put(
-            `/api/orders/${order.id}`,
+            `api/orders/${order.id}`,
             order,
             config
         );
@@ -231,7 +231,7 @@ export const updateOrderToPaid = (order) => async (dispatch, getState) => {
         };
         //update order
         const { data } = await axios.post(
-            `/api/orders/${order.id}/pay`,
+            `api/orders/${order.id}/pay`,
             order,
             config
         );

@@ -105,7 +105,7 @@ describe("it fires a listCategories action", () => {
 
     it("fires a categories request action with no parameters", async () => {
         moxios.stubRequest(
-            "/api/categories?keyword=&pageNumber=",
+            "api/categories?keyword=&pageNumber=",
             successResponseWithoutParameters
         );
 
@@ -126,7 +126,7 @@ describe("it fires a listCategories action", () => {
         const pageNumber = 1;
 
         moxios.stubRequest(
-            `/api/categories?keyword=${keyword}&pageNumber=${pageNumber}`,
+            `api/categories?keyword=${keyword}&pageNumber=${pageNumber}`,
             successResponseWithParameters
         );
 
@@ -144,7 +144,7 @@ describe("it fires a listCategories action", () => {
 
     it("fires a categories request action and expect an error", async () => {
         moxios.stubRequest(
-            "/api/categories?keyword=&pageNumber=",
+            "api/categories?keyword=&pageNumber=",
             errorResponse
         );
 

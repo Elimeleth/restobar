@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios from "../axios.conf";
 import {
     TABLE_LIST_REQUEST,
     TABLE_LIST_SUCCESS,
@@ -81,7 +81,7 @@ export const listTables = (keyword = "", pageNumber = "") => async (
 
         //get all tables
         const { data } = await axios.get(
-            `/api/tables?keyword=${keyword}&pageNumber=${pageNumber}`,
+            `api/tables?keyword=${keyword}&pageNumber=${pageNumber}`,
             config
         );
 
@@ -194,7 +194,7 @@ export const updateTable = (table) => async (dispatch, getState) => {
 
         //update table
         const { data } = await axios.put(
-            `/api/tables/${table.id}`,
+            `api/tables/${table.id}`,
             table,
             config
         );

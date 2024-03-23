@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Modal from "react-modal";
-import axios from "axios";
+import axios from "../../axios.conf";
 
 /* Components */
 import HeaderContent from "../../components/HeaderContent";
