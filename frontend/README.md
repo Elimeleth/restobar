@@ -8,4 +8,6 @@ sudo rsync -avz -e 'ssh -p YOUR-PORT' build/ root@YOUR-IP-SERVER:/home/comandera
 
 docker build . -f Dockerfile.dev -t front
 
+docker rm -f front
+
 docker run --restart always -p 3000:3000 --name front front
