@@ -1,6 +1,7 @@
 You need node version 14 or lower
 
 __DOCKER__
+
 npm run build
 
 sudo rsync -avz -e 'ssh -p YOUR-PORT' build/ root@YOUR-IP-SERVER:/home/comandera/frontend/build
