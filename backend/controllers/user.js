@@ -9,6 +9,17 @@ const { Op } = require("sequelize");
 //@access   Private/admin
 exports.registerUser = asyncHandler(async (req, res) => {
     const { name, email, password, isAdmin } = req.body;
+    const userId = req.userBy
+
+    if (userId !== 0) {
+        res.status(400);
+        throw new Error("User cannot create Admin's User");
+    }
+
+    if (userId === 0 && !isAdmin) {
+        res.status(400);
+        throw new Error("User Root cannot create not Admin's User");
+    }
 
     //check if email is already in use
     const userExists = await User.findOne({ where: { email } });
@@ -24,6 +35,7 @@ exports.registerUser = asyncHandler(async (req, res) => {
         email,
         password,
         isAdmin,
+        userId
     });
     if (user) {
         //return created user
@@ -33,6 +45,7 @@ exports.registerUser = asyncHandler(async (req, res) => {
             email: user.email,
             isAdmin: user.isAdmin,
             image: user.image,
+            userId
         });
     } else {
         res.status(400);
@@ -90,6 +103,7 @@ exports.getUsers = asyncHandler(async (req, res) => {
     const page = Number(req.query.pageNumber) || 1;
     //check for keywords
     const keyword = req.query.keyword ? req.query.keyword : null;
+    const userId = req.userBy
 
     let options = {
         attributes: {
@@ -97,6 +111,7 @@ exports.getUsers = asyncHandler(async (req, res) => {
         },
         offset: pageSize * (page - 1),
         limit: pageSize,
+        where: {userId}
     };
 
     if (keyword) {
@@ -108,12 +123,13 @@ exports.getUsers = asyncHandler(async (req, res) => {
                     { name: { [Op.like]: `%${keyword}%` } },
                     { email: { [Op.like]: `%${keyword}%` } },
                 ],
+                userId
             },
         };
     }
 
-    const count = await User.count({});
-    const users = await User.findAll({});
+    const count = await User.count({...options});
+    const users = await User.findAll({ ...options });
 
     res.json({ users, page, pages: Math.ceil(count / pageSize) });
 });

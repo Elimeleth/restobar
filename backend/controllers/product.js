@@ -9,9 +9,10 @@ const { Op } = require("sequelize");
 exports.createProduct = asyncHandler(async (req, res) => {
     const { name, price, stock, categoryId } = req.body;
     const category = await Category.findByPk(categoryId);
+    const userId = req.userBy
 
     if (category) {
-        createdProduct = await category.createProduct({ name, price, stock });
+        createdProduct = await category.createProduct({ name, price, stock, userId });
         res.json(createdProduct);
     } else {
         res.status(404);
@@ -24,6 +25,7 @@ exports.createProduct = asyncHandler(async (req, res) => {
 //@access   Private/user
 exports.getProducts = asyncHandler(async (req, res) => {
     const pageSize = 5;
+    const userId = req.userBy
     const page = Number(req.query.pageNumber) || 1;
 
     const keyword = req.query.keyword ? req.query.keyword : null;
@@ -36,6 +38,7 @@ exports.getProducts = asyncHandler(async (req, res) => {
 
         offset: pageSize * (page - 1),
         limit: pageSize,
+        where: {userId}
     };
 
     if (keyword) {
@@ -48,6 +51,7 @@ exports.getProducts = asyncHandler(async (req, res) => {
                     { price: keyword },
                     { "$category.name$": { [Op.like]: `%${keyword}%` } },
                 ],
+                userId
             },
         };
     }

@@ -9,7 +9,10 @@ const { Op } = require("sequelize");
 
 exports.createTable = asyncHandler(async (req, res) => {
     const name = req.body.name;
-    const createdTable = await Table.create({ name });
+    const userId = req.userBy;
+    
+    const createdTable = await Table.create({ name, userId });
+
     res.status(201).json(createdTable);
 });
 
@@ -17,9 +20,10 @@ exports.createTable = asyncHandler(async (req, res) => {
 //@route    GET /api/tables
 //@access   Private/user
 exports.getTables = asyncHandler(async (req, res) => {
-    const pageSize = 5;
+    const pageSize = 10;
     const page = Number(req.query.pageNumber) || 1;
     const keyword = req.query.keyword ? req.query.keyword : null;
+    const userId = req.userBy
 
     let options = {
         attributes: {
@@ -27,6 +31,9 @@ exports.getTables = asyncHandler(async (req, res) => {
         },
         offset: pageSize * (page - 1),
         limit: pageSize,
+        where: {
+            userId
+        }
     };
 
     if (keyword) {
@@ -37,13 +44,14 @@ exports.getTables = asyncHandler(async (req, res) => {
                     { id: { [Op.like]: `%${keyword}%` } },
                     { name: { [Op.like]: `%${keyword}%` } },
                 ],
+                userId
             },
         };
     }
 
     const count = await Table.count({ ...options });
     const tables = await Table.findAll({ ...options });
-
+    
     res.json({ tables, page, pages: Math.ceil(count / pageSize) });
 });
 
@@ -51,6 +59,8 @@ exports.getTables = asyncHandler(async (req, res) => {
 //@route    GET /api/tables/all
 //@access   Private/user
 exports.getAllTables = asyncHandler(async (req, res) => {
+    const userId = req.userBy;
+    
     const tables = await Table.findAll({
         include: [
             {
@@ -60,6 +70,7 @@ exports.getAllTables = asyncHandler(async (req, res) => {
                 order: [["id", "DESC"]],
             },
         ],
+        where: { userId }
     });
     res.json(tables);
 });

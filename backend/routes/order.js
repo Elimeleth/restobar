@@ -22,7 +22,7 @@ router
     .post(protect, orderCreateValidator, runValidation, createOrder)
     .get(protect, getOrders);
 
-router.route("/statistics").get(getStatistics);
+router.route("/statistics").get(protect, getStatistics);
 
 router
     .route("/:id")

@@ -11,6 +11,7 @@ module.exports = (sequelize, DataTypes) => {
             // define association here
             this.belongsTo(models.Order, { foreignKey: "orderId" });
             this.belongsTo(models.Product, { foreignKey: "productId" });
+            // this.belongsTo(models.User, { foreignKey: "userId" });
         }
     }
     OrderProduct.init(

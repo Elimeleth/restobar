@@ -9,6 +9,7 @@ module.exports = (sequelize, DataTypes) => {
          */
         static associate(models) {
             // define association here
+            // this.hasOne(models.User, { foreignKey: "userId", as: "users" });
             //this.belongsToMany(models.Chat, {through: 'ChatUser', foreignKey:'userId'})
             this.hasMany(models.Order, { foreignKey: "tableId", as: "orders" });
         }
@@ -16,6 +17,7 @@ module.exports = (sequelize, DataTypes) => {
     Table.init(
         {
             name: DataTypes.STRING,
+            userId: DataTypes.INTEGER,
             occupied: DataTypes.BOOLEAN,
         },
         {

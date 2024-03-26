@@ -26,7 +26,7 @@ exports.createOrder = asyncHandler(async (req, res) => {
         const createdOrder = await Order.create({
             total,
             tableId: !delivery ? tableId : null,
-            userId: req.user.id,
+            userId: req.userBy,
             clientId: clientId,
             delivery: delivery,
             note: note,
@@ -59,6 +59,7 @@ exports.getOrders = asyncHandler(async (req, res) => {
     const page = Number(req.query.pageNumber) || 1;
     const delivery = Boolean(req.query.delivery) || false;
     const keyword = req.query.keyword ? req.query.keyword : null;
+    const userId = req.userBy
     let options = {
         include: [
             { model: Client, as: "client" },
@@ -70,6 +71,7 @@ exports.getOrders = asyncHandler(async (req, res) => {
         order: [["id", "DESC"]],
         offset: pageSize * (page - 1),
         limit: pageSize,
+        where: { userId }
     };
 
     if (keyword) {
@@ -83,6 +85,7 @@ exports.getOrders = asyncHandler(async (req, res) => {
                     { "$table.name$": { [Op.like]: `%${keyword}%` } },
                 ],
             },
+            userId
         };
     }
 
@@ -242,18 +245,21 @@ exports.deleteOrder = asyncHandler(async (req, res) => {
 exports.getStatistics = asyncHandler(async (req, res) => {
     const TODAY_START = new Date().setHours(0, 0, 0, 0);
     const NOW = new Date();
+    const userId = req.userBy
 
     const sales = await Order.findAll({
         where: {
             isPaid: true,
+            userId
         },
         limit: 5,
-        include: { all: true, nested: true },
+        include: { all: true, nested: true }
     });
 
     const totalSales = await Order.sum("total", {
         where: {
             isPaid: true,
+            userId
         },
     });
 
@@ -261,12 +267,14 @@ exports.getStatistics = asyncHandler(async (req, res) => {
         where: {
             delivery: true,
             isPaid: true,
+            userId
         },
     });
 
     const totalOrdersPaid = await Order.count({
         where: {
             isPaid: true,
+            userId
         },
     });
 
@@ -277,12 +285,14 @@ exports.getStatistics = asyncHandler(async (req, res) => {
                 [Op.lt]: NOW,
             },
             isPaid: true,
+            userId
         },
     });
 
     const orders = await Order.findAll({
         where: {
             [Op.or]: [{ isPaid: false }],
+            userId
         },
         include: { all: true, nested: true },
         attributes: {

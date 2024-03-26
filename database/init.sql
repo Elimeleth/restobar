@@ -33,22 +33,24 @@ DROP TABLE IF EXISTS `Categories`;
 CREATE TABLE IF NOT EXISTS `Categories` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL,
+  `userId` int(11) NOT NULL,
   `createdAt` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updatedAt` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  KEY `userId` (`userId`)
 ) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 
 --
 -- Volcado de datos para la tabla `Categories`
 --
 
-INSERT INTO `Categories` (`id`, `name`, `createdAt`, `updatedAt`) VALUES
-(1, 'CERVEZAS', '2021-08-23 05:50:50', '2021-08-23 05:50:50'),
-(2, 'GASEOSAS', '2021-08-23 05:50:50', '2021-08-23 05:50:50'),
-(3, 'PIZZAS', '2021-08-23 05:50:50', '2021-08-23 05:50:50'),
-(4, 'HAMBURGUESAS', '2021-08-23 05:50:50', '2021-08-23 05:50:50'),
-(5, 'EMPANADAS', '2021-08-23 05:50:50', '2021-08-23 05:50:50'),
-(6, 'LOMITOS', '2021-08-23 05:50:50', '2021-08-23 05:50:50');
+INSERT INTO `Categories` (`id`, `name`, `userId`,  `createdAt`, `updatedAt`) VALUES
+(1, 'CERVEZAS', 1, '2021-08-23 05:50:50', '2021-08-23 05:50:50'),
+(2, 'GASEOSAS', 1, '2021-08-23 05:50:50', '2021-08-23 05:50:50'),
+(3, 'PIZZAS', 1, '2021-08-23 05:50:50', '2021-08-23 05:50:50'),
+(4, 'HAMBURGUESAS', 1, '2021-08-23 05:50:50', '2021-08-23 05:50:50'),
+(5, 'EMPANADAS', 1, '2021-08-23 05:50:50', '2021-08-23 05:50:50'),
+(6, 'LOMITOS', 1, '2021-08-23 05:50:50', '2021-08-23 05:50:50');
 
 -- --------------------------------------------------------
 
@@ -64,20 +66,22 @@ CREATE TABLE IF NOT EXISTS `Clients` (
   `phone` varchar(255) NOT NULL DEFAULT '999999999',
   `email` varchar(255) NOT NULL,
   `dni` varchar(255) NOT NULL,
+  `userId` int(11) NOT NULL,
   `createdAt` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updatedAt` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   UNIQUE KEY `email` (`email`),
-  UNIQUE KEY `dni` (`dni`)
+  UNIQUE KEY `dni` (`dni`),
+  KEY `userId` (`userId`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 --
 -- Volcado de datos para la tabla `Clients`
 --
 
-INSERT INTO `Clients` (`id`, `name`, `address`, `phone`, `email`, `dni`, `createdAt`, `updatedAt`) VALUES
-(1, 'Particular', 'PARTICULAR 999', '999999999', 'particular@example.com', '999999999', '2021-08-23 05:50:51', '2021-08-23 05:50:51'),
-(2, 'John Doe', 'Barrio Centro, Rivadavia 1030', '3804123123', 'johndoe@example.com', '40123123', '2021-08-23 05:50:51', '2021-08-23 05:50:51');
+INSERT INTO `Clients` (`id`, `name`, `address`, `phone`, `email`, `dni`, `userID`, `createdAt`, `updatedAt`) VALUES
+(1, 'Particular', 'PARTICULAR 999', '999999999', 'particular@example.com', '999999999', 1, '2021-08-23 05:50:51', '2021-08-23 05:50:51'),
+(2, 'John Doe', 'Barrio Centro, Rivadavia 1030', '3804123123', 'johndoe@example.com', '40123123', 1, '2021-08-23 05:50:51', '2021-08-23 05:50:51');
 
 -- --------------------------------------------------------
 
@@ -133,21 +137,23 @@ CREATE TABLE IF NOT EXISTS `Products` (
   `price` double NOT NULL,
   `stock` int(11) NOT NULL,
   `categoryId` int(11) NOT NULL,
+  `userId` int(11) NOT NULL,
   `createdAt` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updatedAt` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
-  KEY `categoryId` (`categoryId`)
+  KEY `categoryId` (`categoryId`),
+  KEY `userId` (`userId`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
 --
 -- Volcado de datos para la tabla `Products`
 --
 
-INSERT INTO `Products` (`id`, `name`, `price`, `stock`, `categoryId`, `createdAt`, `updatedAt`) VALUES
-(1, 'HAMBRUGUESA CHICA', 120, 50, 4, '2021-08-23 05:50:51', '2021-08-23 05:50:51'),
-(2, 'HAMBRUGUESA GRANDE', 180, 70, 4, '2021-08-23 05:50:51', '2021-08-23 05:50:51'),
-(3, 'COCA COLA 3LTS', 180, 70, 2, '2021-08-23 05:50:51', '2021-08-23 05:50:51'),
-(4, 'COCA COLA 1.5LTS', 180, 70, 2, '2021-08-23 05:50:51', '2021-08-23 05:50:51');
+INSERT INTO `Products` (`id`, `name`, `userId`, `price`, `stock`, `categoryId`, `createdAt`, `updatedAt`) VALUES
+(1, 'HAMBRUGUESA CHICA', 1, 120, 50, 4, '2021-08-23 05:50:51', '2021-08-23 05:50:51'),
+(2, 'HAMBRUGUESA GRANDE', 1, 180, 70, 4, '2021-08-23 05:50:51', '2021-08-23 05:50:51'),
+(3, 'COCA COLA 3LTS', 1, 180, 70, 2, '2021-08-23 05:50:51', '2021-08-23 05:50:51'),
+(4, 'COCA COLA 1.5LTS', 1, 180, 70, 2, '2021-08-23 05:50:51', '2021-08-23 05:50:51');
 
 -- --------------------------------------------------------
 
@@ -177,33 +183,7 @@ INSERT INTO `SequelizeMeta` (`name`) VALUES
 
 -- --------------------------------------------------------
 
---
--- Estructura de tabla para la tabla `Tables`
---
 
-DROP TABLE IF EXISTS `Tables`;
-CREATE TABLE IF NOT EXISTS `Tables` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) DEFAULT NULL,
-  `occupied` tinyint(1) DEFAULT '0',
-  `createdAt` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `updatedAt` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
-
---
--- Volcado de datos para la tabla `Tables`
---
-
-INSERT INTO `Tables` (`id`, `name`, `occupied`, `createdAt`, `updatedAt`) VALUES
-(1, 'PATIO 1', 0, '2021-08-23 05:50:50', '2021-08-23 05:50:50'),
-(2, 'PATIO 2', 0, '2021-08-23 05:50:50', '2021-08-23 05:50:50'),
-(3, 'PATIO 3', 0, '2021-08-23 05:50:50', '2021-08-23 05:50:50'),
-(4, 'INTERIOR 1', 0, '2021-08-23 05:50:50', '2021-08-23 05:50:50'),
-(5, 'INTERIOR 2', 0, '2021-08-23 05:50:50', '2021-08-23 05:50:50'),
-(6, 'BARRA 1', 0, '2021-08-23 05:50:50', '2021-08-23 05:50:50');
-
--- --------------------------------------------------------
 
 --
 -- Estructura de tabla para la tabla `Users`
@@ -217,20 +197,54 @@ CREATE TABLE IF NOT EXISTS `Users` (
   `password` varchar(255) NOT NULL,
   `image` varchar(255) NOT NULL DEFAULT '/avatar.png',
   `isAdmin` tinyint(1) NOT NULL DEFAULT '0',
+  `userId` int(11) DEFAULT NULL,
   `createdAt` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updatedAt` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
-  UNIQUE KEY `email` (`email`)
+  UNIQUE KEY `email` (`email`),
+  KEY `userId` (`userId`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 --
 -- Volcado de datos para la tabla `Users`
 --
 
-INSERT INTO `Users` (`id`, `name`, `email`, `password`, `image`, `isAdmin`, `createdAt`, `updatedAt`) VALUES
-(1, 'Admin', 'admin@example.com', '$2b$10$Ob28q7LgYBCadB0mgVnPD.u8WtBVVoWs28iZTrxFF8LWuwG7xWiuO', '/avatar.png', 1, '2021-08-23 05:50:50', '2021-08-23 05:50:50'),
-(2, 'User', 'user@example.com', '$2b$10$Ob28q7LgYBCadB0mgVnPD.u8WtBVVoWs28iZTrxFF8LWuwG7xWiuO', '/avatar.png', 0, '2021-08-23 05:50:50', '2021-08-23 05:50:50');
+INSERT INTO `Users` (`id`, `name`, `email`, `userId`, `password`, `image`, `isAdmin`, `createdAt`, `updatedAt`) VALUES
+(0, 'ROOT', 'root@root.com', NULL, '$2b$10$Ob28q7LgYBCadB0mgVnPD.u8WtBVVoWs28iZTrxFF8LWuwG7xWiuO', '/avatar.png', 1, '2021-08-23 05:50:50', '2021-08-23 05:50:50'),
+(1, 'Admin', 'admin@example.com', 0, '$2b$10$Ob28q7LgYBCadB0mgVnPD.u8WtBVVoWs28iZTrxFF8LWuwG7xWiuO', '/avatar.png', 1, '2021-08-23 05:50:50', '2021-08-23 05:50:50'),
+(2, 'User', 'user@example.com', 1, '$2b$10$Ob28q7LgYBCadB0mgVnPD.u8WtBVVoWs28iZTrxFF8LWuwG7xWiuO', '/avatar.png', 0, '2021-08-23 05:50:50', '2021-08-23 05:50:50'),
+(3, 'Elimeleth Admin', 'elimeleth@gogh.com', 0, '$2b$10$Ob28q7LgYBCadB0mgVnPD.u8WtBVVoWs28iZTrxFF8LWuwG7xWiuO', '/avatar.png', 1, '2021-08-23 05:50:50', '2021-08-23 05:50:50');
 
+
+--
+-- Estructura de tabla para la tabla `Tables`
+--
+
+DROP TABLE IF EXISTS `Tables`;
+CREATE TABLE IF NOT EXISTS `Tables` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `userId` int(11) NOT NULL,
+  `name` varchar(255) DEFAULT NULL,
+  `occupied` tinyint(1) DEFAULT '0',
+  `createdAt` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updatedAt` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  KEY `userId` (`userId`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+
+--
+-- Volcado de datos para la tabla `Tables`
+--
+
+INSERT INTO `Tables` (`id`, `name`, `userId`, `occupied`, `createdAt`, `updatedAt`) VALUES
+(1, 'PATIO 1', 1, 0, '2021-08-23 05:50:50', '2021-08-23 05:50:50'),
+(2, 'PATIO 2', 1, 0, '2021-08-23 05:50:50', '2021-08-23 05:50:50'),
+(3, 'PATIO 3', 1, 0, '2021-08-23 05:50:50', '2021-08-23 05:50:50'),
+(4, 'INTERIOR 1', 1, 0, '2021-08-23 05:50:50', '2021-08-23 05:50:50'),
+(5, 'INTERIOR 2', 1, 0, '2021-08-23 05:50:50', '2021-08-23 05:50:50'),
+(6, 'BARRA 1', 1, 0, '2021-08-23 05:50:50', '2021-08-23 05:50:50');
+
+-- --------------------------------------------------------
 --
 -- Restricciones para tablas volcadas
 --
@@ -243,6 +257,13 @@ ALTER TABLE `OrderProducts`
   ADD CONSTRAINT `orderproducts_ibfk_2` FOREIGN KEY (`productId`) REFERENCES `Products` (`id`) ON DELETE CASCADE;
 
 --
+-- Filtros para la tabla `OrderProducts`
+--
+ALTER TABLE `Users`
+  ADD CONSTRAINT `users_ibfk_1` FOREIGN KEY (`userId`) REFERENCES `Users` (`id`) ON DELETE CASCADE;
+
+
+--
 -- Filtros para la tabla `Orders`
 --
 ALTER TABLE `Orders`
@@ -250,12 +271,35 @@ ALTER TABLE `Orders`
   ADD CONSTRAINT `orders_ibfk_2` FOREIGN KEY (`clientId`) REFERENCES `Clients` (`id`) ON DELETE CASCADE,
   ADD CONSTRAINT `orders_ibfk_3` FOREIGN KEY (`tableId`) REFERENCES `Tables` (`id`) ON DELETE CASCADE;
 
+-- Filtros para la tabla `Table`
+--
+ALTER TABLE `Clients`
+  ADD CONSTRAINT `clients_ibfk_1` FOREIGN KEY (`userId`) REFERENCES `Users` (`id`) ON DELETE CASCADE;
+
+-- Filtros para la tabla `Table`
+--
+ALTER TABLE `Categories`
+  ADD CONSTRAINT `categories_ibfk_1` FOREIGN KEY (`userId`) REFERENCES `Users` (`id`) ON DELETE CASCADE;
+
+
+
+--
+-- Filtros para la tabla `Table`
+--
+ALTER TABLE `Tables`
+  ADD CONSTRAINT `tables_ibfk_1` FOREIGN KEY (`userId`) REFERENCES `Users` (`id`) ON DELETE CASCADE;
+
 --
 -- Filtros para la tabla `Products`
 --
 ALTER TABLE `Products`
-  ADD CONSTRAINT `products_ibfk_1` FOREIGN KEY (`categoryId`) REFERENCES `Categories` (`id`) ON DELETE CASCADE;
+  ADD CONSTRAINT `products_ibfk_1` FOREIGN KEY (`categoryId`) REFERENCES `Categories` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `products_ibfk_2` FOREIGN KEY (`userId`) REFERENCES `Users` (`id`) ON DELETE CASCADE;
 COMMIT;
+
+
+-- ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'secret'; 
+-- FLUSH PRIVILEGES;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

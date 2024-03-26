@@ -2,8 +2,12 @@ version: "3"
 services:
     mysql:
         image: mysql:5.7
-        ports:
-            - "3306:3306"
+        container_name: mysql
+        network_mode: host
+        expose:
+             - 3306
+        #ports:
+        #    - "3306:3306"
         command: --init-file /data/application/init.sql
         restart: always
         volumes:

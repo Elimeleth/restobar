@@ -15,6 +15,15 @@ module.exports = {
         type: Sequelize.BOOLEAN,
         defaultValue: false
       },
+      userId: {
+          type: Sequelize.INTEGER,
+          allowNull: false,
+          references: {
+              model: "User",
+              key: "id",
+          },
+          onDelete: "CASCADE",
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE,

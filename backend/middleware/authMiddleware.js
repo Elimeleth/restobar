@@ -11,6 +11,7 @@ exports.protect = asyncHandler(async (req, res, next) => {
     if (
         req.headers.authorization &&
         req.headers.authorization.startsWith("Bearer")
+
     ) {
         try {
             //get the token from header
@@ -21,6 +22,8 @@ exports.protect = asyncHandler(async (req, res, next) => {
 
             //get user and remove password
             req.user = await User.findByPk(decoded.id);
+            req.userBy = req.user.isAdmin ? req.user?.id : req.user?.userId
+
             next();
         } catch (error) {
             console.error(error);

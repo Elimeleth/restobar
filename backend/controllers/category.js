@@ -7,7 +7,8 @@ const { Op } = require("sequelize");
 //@access   Private/user
 exports.createCategory = asyncHandler(async (req, res) => {
     const name = req.body.name;
-    const createdCategory = await Category.create({ name });
+    const userId = req.userBy
+    const createdCategory = await Category.create({ name, userId });
     res.status(201).json(createdCategory);
 });
 
@@ -18,6 +19,7 @@ exports.getCategories = asyncHandler(async (req, res) => {
     const pageSize = 5;
     const page = Number(req.query.pageNumber) || 1;
     const keyword = req.query.keyword ? req.query.keyword : null;
+    const userId = req.userBy
 
     /* SEARCH OPTIONS */
     let options = {
@@ -26,6 +28,7 @@ exports.getCategories = asyncHandler(async (req, res) => {
         },
         offset: pageSize * (page - 1),
         limit: pageSize,
+        where: { userId }
     };
 
     /* CHECK IF THERE IS A KEYWORD */
@@ -37,6 +40,7 @@ exports.getCategories = asyncHandler(async (req, res) => {
                     { id: { [Op.like]: `%${keyword}%` } },
                     { name: { [Op.like]: `%${keyword}%` } },
                 ],
+                userId
             },
         };
     }

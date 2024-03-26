@@ -7,11 +7,13 @@ const { Op } = require("sequelize");
 //@access   Private/user
 exports.createClient = asyncHandler(async (req, res) => {
     const { name, address, phone, email, dni } = req.body;
+    
     const createdClient = await Client.create({
         name,
         address,
         phone,
         email,
+        userId: req.userBy,
         dni,
     });
     res.status(201).json(createdClient);
@@ -24,12 +26,14 @@ exports.getClients = asyncHandler(async (req, res) => {
     const pageSize = 5;
     const page = Number(req.query.pageNumber) || 1;
     const keyword = req.query.keyword ? req.query.keyword : null;
+    const userId = req.userBy
     let options = {
         attributes: {
             exclude: ["updatedAt"],
         },
         offset: pageSize * (page - 1),
         limit: pageSize,
+        where: {userId}
     };
 
     if (keyword) {
@@ -44,6 +48,9 @@ exports.getClients = asyncHandler(async (req, res) => {
                     { email: { [Op.like]: `%${keyword}%` } },
                     { dni: { [Op.like]: `%${keyword}%` } },
                 ],
+                [Op.eq]: {
+                    userId
+                }
             },
         };
     }
