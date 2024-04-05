@@ -5,7 +5,6 @@ COPY ./frontend/package.json ./
 COPY ./frontend ./
 RUN pnpm install
 RUN npm run build
-COPY ./build ./build
 
 RUN pnpm install -g serve
 EXPOSE 3000
