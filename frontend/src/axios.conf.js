@@ -1,5 +1,5 @@
 import axios from "axios";
 
 export default axios.create({
-    baseURL: "https://api-comandera.flippoapp.com",
+    baseURL: "api-comandera.flippoapp.com/",
 })
