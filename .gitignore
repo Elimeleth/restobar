@@ -16,7 +16,7 @@ frontend/public/pages
 /coverage
 
 # production
-/frontend/build
+# /frontend/build
 /frontend/node_modules
 /backend/node_modules
 /backend/.env
