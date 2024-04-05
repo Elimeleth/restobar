@@ -5,4 +5,4 @@ COPY ./frontend/package*.json .
 COPY ./frontend .
 RUN pnpm install
 RUN pnpm run build
-CMD ["serve", "-s", "./app/build"]
+CMD ["serve", "-s", "build"]
