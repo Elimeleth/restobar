@@ -51,7 +51,7 @@ jobs:
         continue-on-error: false
 
   deploy:
-    needs: create-docker-image
+    needs: create-docker-image-backend
     runs-on: ubuntu-latest
     steps:
       - name: Install sshpass
@@ -62,9 +62,8 @@ jobs:
           sshpass -p ${{secrets.AUTH_PASS}} ssh -o StrictHostKeyChecking=no ${{secrets.AUTH_SERVER}} << EOF
             cd /home/comandera/
             docker login ghcr.io -u elimeleth -p ${{secrets.GH_TOKEN}}
-            docker pull ghcr.io/elimeleth/ft-comandera:latest
             docker pull ghcr.io/elimeleth/bc-comandera:latest
-            docker rm -f bc-comandera ft-comandera 2>/dev/null
+            docker rm -f bc-comandera 2>/dev/null
             docker run -d \
               --name bc-comandera \
               --user 0:0
@@ -82,6 +81,22 @@ jobs:
               --restart always \
               -v $(pwd)/:/app/
               ghcr.io/elimeleth/bc-comandera:latest
+          EOF
+
+  deploy:
+    needs: create-docker-image-front
+    runs-on: ubuntu-latest
+    steps:
+      - name: Install sshpass
+        run: sudo apt-get install -y sshpass
+
+      - name: SSH into Server (with lowercase username in Docker commands)
+        run: |
+          sshpass -p ${{secrets.AUTH_PASS}} ssh -o StrictHostKeyChecking=no ${{secrets.AUTH_SERVER}} << EOF
+            cd /home/comandera/
+            docker login ghcr.io -u elimeleth -p ${{secrets.GH_TOKEN}}
+            docker pull ghcr.io/elimeleth/ft-comandera:latest
+            docker rm -f ft-comandera 2>/dev/null
             docker run -d \
               --name ft-comandera \
               --user 0:0
