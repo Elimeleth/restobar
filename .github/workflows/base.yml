@@ -28,7 +28,7 @@ jobs:
           tags: ghcr.io/elimeleth/ft-comandera:latest  # Use lowercase username in tag
         continue-on-error: false
 
-  create-docker-image-front:
+  create-docker-image-backend:
     runs-on: ubuntu-latest
     steps:
       - name: checkout code
