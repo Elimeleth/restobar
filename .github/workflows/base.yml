@@ -66,20 +66,20 @@ jobs:
             docker rm -f bc-comandera 2>/dev/null
             docker run -d \
               --name bc-comandera \
-              --user 0:0
+              --user 0:0 \
               -p 8000:5000 \
               --cap-add=SYS_ADMIN \
-              -e DB_USER=${{secrets.DB_USER}}
-              -e DB_HOST=${{secrets.DB_HOST}}
-              -e DB_NAME=${{secrets.DB_NAME}}
-              -e DB_PASSWORD=${{secrets.DB_PASSWORD}}
-              -e DB_DIALECT=${{secrets.DB_DIALECT}}
-              -e DB_PORT=${{secrets.DB_PORT}}
-              -e NODE_ENV=development
-              -e PORT=5000
-              -e JWT_SECRET=abc123
+              -e DB_USER=${{secrets.DB_USER}} \
+              -e DB_HOST=${{secrets.DB_HOST}} \
+              -e DB_NAME=${{secrets.DB_NAME}} \
+              -e DB_PASSWORD=${{secrets.DB_PASSWORD}} \
+              -e DB_DIALECT=${{secrets.DB_DIALECT}} \
+              -e DB_PORT=${{secrets.DB_PORT}} \
+              -e NODE_ENV=development \
+              -e PORT=5000 \
+              -e JWT_SECRET=abc123 \
               --restart always \
-              -v $(pwd)/:/app/
+              -v $(pwd)/:/app/ \
               ghcr.io/elimeleth/bc-comandera:latest
           EOF
 
@@ -99,9 +99,9 @@ jobs:
             docker rm -f ft-comandera 2>/dev/null
             docker run -d \
               --name ft-comandera \
-              --user 0:0
+              --user 0:0 \
               -p 9000:3000 \
-              -v $(pwd)/:/app/
+              -v $(pwd)/:/app/ \
               --cap-add=SYS_ADMIN \
               --restart always \
               ghcr.io/elimeleth/ft-comandera:latest
