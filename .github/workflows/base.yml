@@ -23,7 +23,7 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           context: .
-          file: ./frontend/Dockerfile
+          file: ./front.Dockerfile
           push: true
           tags: ghcr.io/elimeleth/ft-comandera:latest  # Use lowercase username in tag
         continue-on-error: false
@@ -45,7 +45,7 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           context: .
-          file: ./backend/Dockerfile
+          file: ./api.Dockerfile
           push: true
           tags: ghcr.io/elimeleth/bc-comandera:latest  # Use lowercase username in tag
         continue-on-error: false

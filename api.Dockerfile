@@ -1,7 +1,8 @@
 FROM node:16
 # RUN apk add --no-cache bash
 WORKDIR /app
-COPY . .
+COPY ./backend/package*.json ./
+COPY ./backend ./
 RUN npm install
-COPY . .
+
 CMD ["npm","run","dev"]
