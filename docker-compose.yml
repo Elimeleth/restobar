@@ -1,23 +1,5 @@
 version: "3"
 services:
-    mysql:
-        image: mysql:5.7
-        container_name: mysql
-        network_mode: host
-        expose:
-             - 3306
-        #ports:
-        #    - "3306:3306"
-        command: --init-file /data/application/init.sql
-        restart: always
-        volumes:
-            - ./database/init.sql:/data/application/init.sql
-        environment:
-            MYSQL_ROOT_USER: root
-            MYSQL_ROOT_PASSWORD: secret
-            MYSQL_DATABASE: restobar
-            MYSQL_USER: mysql
-            MYSQL_PASSWORD: secret
     backend:
         depends_on:
             - mysql

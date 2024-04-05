@@ -9,14 +9,14 @@ const { Op } = require("sequelize");
 //@access   Private/admin
 exports.registerUser = asyncHandler(async (req, res) => {
     const { name, email, password, isAdmin } = req.body;
-    const userId = req.userBy
+    const userId = Number(req.userBy)
 
-    if (userId !== 0) {
+    if (userId !== 1) {
         res.status(400);
         throw new Error("User cannot create Admin's User");
     }
 
-    if (userId === 0 && !isAdmin) {
+    if (userId === 1 && !isAdmin) {
         res.status(400);
         throw new Error("User Root cannot create not Admin's User");
     }
