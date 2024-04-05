@@ -79,7 +79,7 @@ const ProductsTable = ({
     //check stock to show
     const showStock = (product) => {
         const productInOrder = productsInOrder.find(
-            (productIn) => productIn.id === product.id
+            (productIn) => productIn.id === Number(product.id)
         );
         if (productInOrder) return product.stock - productInOrder.quantity;
         return product.stock;
