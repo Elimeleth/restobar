@@ -6,4 +6,4 @@ COPY ./backend/package*.json ./
 COPY ./backend ./
 RUN pnpm install
 
-CMD ["npm","run","dev"]
+CMD ["npm","run","start"]
