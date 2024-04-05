@@ -1,11 +1,12 @@
 FROM node:16 as builder
 WORKDIR /
-# RUN npm i pnpm serve --global --force 
-# COPY ./frontend/package*.json ./
-# COPY ./frontend ./
-# RUN pnpm install
-# RUN pnpm run build
-COPY ./frontend/build ./build
+COPY ./frontend/package*.json ./
+COPY ./frontend ./
+RUN pnpm install
+RUN pnpm run build
 
-EXPOSE 3000
+FROM node:14 as runner
+WORKDIR /
+RUN npm i pnpm serve --global --force 
+COPY --from=builder /build ./build
 CMD ["serve", "-s", "build"]
