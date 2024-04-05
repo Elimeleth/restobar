@@ -50,7 +50,7 @@ jobs:
           tags: ghcr.io/elimeleth/bc-comandera:latest  # Use lowercase username in tag
         continue-on-error: false
 
-  deploy:
+  deploy-backend:
     needs: create-docker-image-backend
     runs-on: ubuntu-latest
     steps:
@@ -83,7 +83,7 @@ jobs:
               ghcr.io/elimeleth/bc-comandera:latest
           EOF
 
-  deploy:
+  deploy-front:
     needs: create-docker-image-front
     runs-on: ubuntu-latest
     steps:
