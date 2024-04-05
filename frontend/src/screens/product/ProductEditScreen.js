@@ -62,7 +62,7 @@ const ProductEditScreen = ({ history, match }) => {
 
         if (product) {
             //load product data
-            if (!product.name || product.id !== productId) {
+            if (!product.name || Number(product.id) !== productId) {
                 dispatch(listProductDetails(productId));
             } else {
                 //set states

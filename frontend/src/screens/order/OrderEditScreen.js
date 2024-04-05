@@ -79,7 +79,7 @@ const OrderEditScreen = ({ history, match }) => {
     useEffect(() => {
         //load order
         if (order) {
-            if (!order.id || order.id !== orderId) {
+            if (!order.id || Number(order.id) !== orderId) {
                 dispatch(listOrderDetails(orderId));
             } else {
                 //set states
@@ -144,7 +144,7 @@ const OrderEditScreen = ({ history, match }) => {
     const filterFreeTables = () => {
         const mappedTables = tables.filter((tableItem) => {
             /* return if table is not occupied OR if the same from order */
-            return tableItem.occupied === false || tableItem.id === table;
+            return tableItem.occupied === false || Number(tableItem.id) === table;
         });
         return mappedTables;
     };

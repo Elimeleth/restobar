@@ -57,7 +57,7 @@ const CategoryEditScreen = ({ history, match }) => {
 
         //load product data
         if (category) {
-            if (!category.name || category.id !== categoryId) {
+            if (!category.name || Number(category.id) !== categoryId) {
                 dispatch(listCategoryDetails(categoryId));
             } else {
                 //set states

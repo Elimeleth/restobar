@@ -55,7 +55,8 @@ const TableEditScreen = ({ history, match }) => {
 
         //load table data
         if (table) {
-            if (!table.name || table.id !== tableId) {
+            console.log({ table })
+            if (!table.name || Number(table.id) !== tableId) {
                 dispatch(listTableDetails(tableId));
             } else {
                 //set states

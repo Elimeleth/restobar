@@ -57,7 +57,7 @@ const ClientEditScreen = ({ history, match }) => {
 
         if (client) {
             //load client data
-            if (!client.name || client.id !== clientId) {
+            if (!client.name || Number(client.id) !== clientId) {
                 dispatch(listClientDetails(clientId));
             } else {
                 //set states

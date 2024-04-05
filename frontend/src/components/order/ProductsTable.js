@@ -90,7 +90,7 @@ const ProductsTable = ({
 
         const mappedProducts = productsToMap.map((item) => {
             productsAlreadyOrdered.map((item2) => {
-                if (item.id === item2.id) {
+                if (Number(item.id) === Number(item2.id)) {
                     item.stock = item.stock + item2.quantity;
                 }
             });

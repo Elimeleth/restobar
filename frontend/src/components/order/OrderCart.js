@@ -7,7 +7,7 @@ const OrderCart = ({ productsInOrder, setProductsInOrder }) => {
 
         //remove product
         const productsIn = productsInOrder.filter(function (item) {
-            return item.id !== product.id;
+            return item.id !== Number(product.id);
         });
 
         setProductsInOrder(productsIn);
@@ -18,7 +18,7 @@ const OrderCart = ({ productsInOrder, setProductsInOrder }) => {
         e.preventDefault();
 
         const newProducts = productsInOrder.map((el) =>
-            el.id === product.id ? { ...el, quantity: el.quantity + 1 } : el
+            el.id === Number(product.id) ? { ...el, quantity: el.quantity + 1 } : el
         );
         setProductsInOrder(newProducts);
     };
@@ -28,7 +28,7 @@ const OrderCart = ({ productsInOrder, setProductsInOrder }) => {
         e.preventDefault();
 
         const newProducts = productsInOrder.map((el) =>
-            el.id === product.id ? { ...el, quantity: el.quantity - 1 } : el
+            el.id === Number(product.id) ? { ...el, quantity: el.quantity - 1 } : el
         );
         setProductsInOrder(newProducts);
     };

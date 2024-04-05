@@ -63,7 +63,7 @@ const UserEditScreen = ({ history, match }) => {
             history.push("/user");
         }
         //load product data
-        if (!user || !user.name || user.id !== userId) {
+        if (!user || !user.name || Number(user.id) !== userId) {
             dispatch(listUserDetails(userId));
         } else {
             //set states s
