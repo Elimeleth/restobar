@@ -1,5 +1,5 @@
 FROM node:16 as builder
-WORKDIR /app
+WORKDIR /
 RUN npm i pnpm serve --global --force 
 COPY ./frontend/package*.json ./
 COPY ./frontend ./
