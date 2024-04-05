@@ -98,9 +98,7 @@ jobs:
             docker rm -f ft-comandera 2>/dev/null
             docker run -d \
               --name ft-comandera \
-              --user 0:0 \
               -p 3000:3000 \
-              --cap-add=SYS_ADMIN \
               --restart always \
               ghcr.io/elimeleth/ft-comandera:latest
           EOF
