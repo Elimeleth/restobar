@@ -54,6 +54,7 @@ const OrderViewScreen = ({ history, match }) => {
             }
         }
         if (order) {
+            console.log({ order })
             if (!order.id || Number(order.id) !== orderId) {
                 dispatch(listOrderDetails(orderId));
             }
