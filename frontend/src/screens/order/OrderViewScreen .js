@@ -53,6 +53,8 @@ const OrderViewScreen = ({ history, match }) => {
                 history.push("/active");
             }
         }
+
+        console.log('ESTOY AQUI Y TU LO SABES')
         if (order) {
             console.log({ order })
             if (!order.id || Number(order.id) !== orderId) {
