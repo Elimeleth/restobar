@@ -26,8 +26,6 @@ jobs:
           file: ./front.Dockerfile
           push: true
           tags: ghcr.io/elimeleth/ft-comandera:latest  # Use lowercase username in tag
-          cache-from: type=registry,ref=ghcr.io/elimeleth/ft-comandera:latest
-          cache-to: type=registry,ref=ghcr.io/elimeleth/ft-comandera:latest,mode=max
         continue-on-error: false
 
   create-docker-image-backend:
@@ -50,8 +48,6 @@ jobs:
           file: ./api.Dockerfile
           push: true
           tags: ghcr.io/elimeleth/bc-comandera:latest  # Use lowercase username in tag
-          cache-from: type=registry,ref=ghcr.io/elimeleth/bc-comandera:latest
-          cache-to: type=registry,ref=ghcr.io/elimeleth/bc-comandera:latest,mode=max
         continue-on-error: false
 
   deploy-backend:
