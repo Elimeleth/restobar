@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
+import { printer as thermalPrinter, types } from "node-thermal-printer"
+
 /* Components */
 import HeaderContent from "../../components/HeaderContent";
 import DataTableLoader from "../../components/loader/DataTableLoader";
@@ -36,6 +38,29 @@ const OrderScreen = ({ history }) => {
         </Link>
     );
 
+    const print = () => {
+        try {
+            const ThermalPrinter = thermalPrinter;
+            const PrinterTypes = types;
+            const electron = typeof process !== 'undefined' && process.versions && !!process.versions.electron;
+
+            let printer = new ThermalPrinter({
+                type: PrinterTypes.EPSON,
+                interface: 'printer:auto',
+                driver: require(electron ? 'electron-printer' : 'printer')
+            });
+
+            printer.alignCenter();
+            printer.println("Hello world");
+
+            printer.execute();
+            
+        } catch (error) {
+            console.log({ errorPrint: error })
+            throw new Error(error?.message)
+        }
+    }
+
     const renderTable = () => (
         <table className="table table-hover text-nowrap">
             <thead>
@@ -45,6 +70,7 @@ const OrderScreen = ({ history }) => {
                     <th className="d-none d-sm-table-cell">Table</th>
                     <th>Paid</th>
                     <th>Total</th>
+                    <th></th>
                     <th></th>
                 </tr>
             </thead>
@@ -87,6 +113,13 @@ const OrderScreen = ({ history }) => {
                             >
                                 View
                             </Link>
+                        </td>
+                        <td>
+                            <button 
+                            onClick={() => print()}
+                            className="btn btn-warning btn-lg">
+                                Print
+                            </button>
                         </td>
                     </tr>
                 ))}
