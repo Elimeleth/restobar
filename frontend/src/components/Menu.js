@@ -30,12 +30,12 @@ const Menu = ({ history }) => {
             {/* Brand Logo */}
             <Link to={"/dashboard"} className="brand-link">
                 <img
-                    src="/logo.png"
-                    alt="AdminLTE Logo"
-                    className="brand-image img-circle elevation-3"
-                    style={{ opacity: ".8" }}
+                    decoding="async"
+                    src="/bakano-isotipo-blanco.webp"
+                    alt="Logo de Bakano"
+                    className="brand-image"
                 />
-                <span className="brand-text font-weight-light">BAKANO</span>
+                <span className="brand-text font-weight-bold">BAKANO</span>
             </Link>
             {/* Sidebar */}
             <div className="sidebar">

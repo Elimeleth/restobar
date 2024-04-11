@@ -29,19 +29,21 @@ const LoginScreen = ({ history }) => {
     return (
         <div
             className="row justify-content-center align-items-center vh-100"
-            style={{ backgroundColor: "#cad5df" }}
+            style={{ backgroundColor: "#191423", margin: "0"}}
         >
             <div className="login-box">
                 {/* /.login-logo */}
                 <div className="card">
                     <div className="card-header ">
                         <div className="login-logo">
-                            <b>BAKANO</b>
+                            <h1>BAKANO</h1>
                             <div className="text-center">
                                 <img
-                                    className="profile-user-img img-fluid img-circle"
-                                    src={"/logo.png"}
+                                    className="img-fluid"
+                                    decoding="async"
+                                    src={"/bakano-isotipo-negro.webp"}
                                     alt="User profile picture"
+                                    style={{width: '100px'}}
                                 />
                             </div>
                         </div>
