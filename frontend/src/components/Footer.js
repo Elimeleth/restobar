@@ -1,13 +1,15 @@
 import React from 'react';
 
 const Footer = () => {
+    function getYear() {
+        const date = new Date();
+        const currentYear = date.getFullYear();
+        return currentYear;
+    }
+
     return ( 
-        <footer className="main-footer">
-            <strong>Copyright © 2014-2019 <a href="http://adminlte.io">AdminLTE.io</a>.</strong>
-            All rights reserved.
-            <div className="float-right d-none d-sm-inline-block">
-                <b>Version</b> 3.0.5
-            </div>
+        <footer className="main-footer Bk-color-black secondary-font">
+            <strong>Copyright © {getYear()} <a href="https://bakano.ec/" className='Bk-link'>BAKANO</a></strong>
         </footer>
      );
 }
