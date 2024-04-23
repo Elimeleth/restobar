@@ -26,7 +26,7 @@ const Menu = ({ history }) => {
     };
 
     return (
-        <aside className="main-sidebar sidebar-dark-primary elevation-4">
+        <aside className="main-sidebar sidebar-dark-primary elevation-4 Bk-bg-black">
             {/* Brand Logo */}
             <Link to={"/dashboard"} className="brand-link">
                 <img

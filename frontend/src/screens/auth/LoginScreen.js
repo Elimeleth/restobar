@@ -90,7 +90,7 @@ const LoginScreen = ({ history }) => {
                                 <div className="col-4">
                                     <button
                                         type="submit"
-                                        className="btn btn-primary btn-block"
+                                        className="btn btn-primary btn-block Bk-button"
                                     >
                                         Sign In
                                     </button>

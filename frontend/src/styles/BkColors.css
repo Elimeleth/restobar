@@ -1,0 +1,31 @@
+.Bk-color-black{
+  color: #191423;
+}
+.Bk-color-pink{
+  color: #e6285c;
+}
+
+.Bk-bg-black{
+  background-color: #191423;
+}
+.Bk-bg-pink{
+  background-color: #e6285c;
+}
+
+.Bk-link{
+  color: #e6285c;
+  &:hover{
+    color: #c2234e;
+  }
+}
+.Bk-button{
+  background-color: #e6285c;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  &:hover{
+    background-color: #c2234e;
+  }
+}

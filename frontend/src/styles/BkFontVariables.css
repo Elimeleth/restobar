@@ -1,0 +1,53 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400&display=swap');
+
+@font-face {
+  font-family: 'Mosk';
+  src: url('/fonts/Mosk-Light-300.ttf') format('truetype');
+  font-weight: 300;
+  font-style: light;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Mosk';
+  src: url('/fonts/Mosk-Normal-400.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Mosk';
+  src: url('/fonts/Mosk-Bold-700.ttf') format('truetype');
+  font-weight: 700;
+  font-style: bold;
+  font-display: swap;
+}
+
+.primary-font {
+  font-family: 'Mosk', sans-serif;
+}
+.secondary-font {
+  font-family: 'Inter', serif;
+}
+
+.font-size-small {
+  font-size: 0.75rem;
+}
+.font-size-normal {
+  font-size: 1rem;
+}
+.font-size-large {
+  font-size: 1.5rem;
+}
+.font-size-extra-large {
+  font-size: 3rem;
+}
+
+.font-weight-thin {
+  font-weight: 300;
+}
+.font-weight-normal {
+  font-weight: 400;
+}
+.font-weight-bold {
+  font-weight: 700;
+}
